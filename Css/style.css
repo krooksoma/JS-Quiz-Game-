@@ -23,7 +23,7 @@ a{
 html{
     height: 100vh;
     width: 100%;
-    background-image: linear-gradient( 0.95turn, rgba(250,50,50,0.7), rgba(0,0,0,0.9), rgba(250,50,50,0.7));
+    background-image: linear-gradient(0.95turn, rgba(250,50,50,0.7), rgba(0,0,0,0.9), rgba(250,50,50,0.7));
     background-repeat: no-repeat;
     color: whitesmoke;
 }
@@ -55,18 +55,4 @@ body{
    width: 30%;    
 }
 
-ul{
-    display: flex;
-    justify-content: flex-start;
-    flex: 1 0 50%;
-}
 
-.question-slot{
-    margin: 0 auto;
-    padding: 3rem;
-}
-
-li{
-    margin: 0 auto;
-    padding: 3rem;
-}

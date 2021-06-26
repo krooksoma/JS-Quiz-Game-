@@ -17,22 +17,28 @@
                 View Scoreboard
             </a>
         </div>
-        <button id="start-button"><h3>Start<span id="countdown">0</span></h3></button>
+        <button id="start-button"><h3>Start</h3></button>
         <div class="timer-display">
-            Timer-Display
+            Timer-Display<span id="countdown">0</span>
         </div>
     </header>
-    <!-- main section to display data from js -->
+   
+    
     <main>
-        <section>
-            <h2 class="question-slot"> Question Slot</h2>
-            <ol class="options">
-                <li class="option1"></li>
-                <li class="option2"></li>
-                <li class="option3"></li>
-                <li class="option4"></li>
-            </ol>
-        </section>
+        <!-- Section to display the question and choices. Inittialy hidden -->
+        <div id="question-slot" class="hidden"> 
+            <div>
+                <h2 class="question-slot"> Question Slot</h2>
+                <div id="options" class="user-choices"></div>
+            </div>            
+        </div>
+        <!-- Section to display final score and prompt for initials to populate scriptDb.js file -->
+        <div id="end-game-screen" class="hidden">
+            <h2>Game results:</h2>
+            <p>Final Score <span id="final-score"></span></p>
+            <p>Enter Initials: <input type="text" id="initials" max=3/></p>
+        </div>
+
     </main>
     <script src="Js/script.js"></script>
     <script src="Js/scriptDB.js"></script>
