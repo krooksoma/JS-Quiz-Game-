@@ -19,23 +19,18 @@
         </div>
         <button id="start-button"><h3>Start</h3></button>
         <div class="timer-display">
-            Timer-Display<span id="countdown">0</span>
+            Timer-Display<h3 id="countdown"></h3>
         </div>
     </header>
    
     
     <main>
         <!-- Section to display the question and choices. Inittialy hidden -->
-        <div id="question-slot" class="hidden"> 
-            <div>
-                <h2 class="question-slot"> Question Slot</h2>
-                <div id="options" class="user-choices"></div>
-            </div>            
-        </div>
+         
         <!-- Section to display final score and prompt for initials to populate scriptDb.js file -->
         <div id="end-game-screen" class="hidden">
             <h2>Game results:</h2>
-            <p>Final Score <span id="final-score"></span></p>
+            <p>Final Score <span id="final-score"></span></p> <!--may not need final-score variable-->
             <p>Enter Initials: <input type="text" id="initials" max=3/></p>
         </div>
 

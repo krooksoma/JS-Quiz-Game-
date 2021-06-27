@@ -49,6 +49,10 @@ body{
    text-align: start;
 }
 
+.scoreboard:hover{
+    color:yellowgreen;
+}
+
 .timer-display{
    font-size: 200%;
    text-align: end;
