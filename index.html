@@ -29,15 +29,16 @@
         <div id="question" class="hidden">
             <h2 id="question-title"></h2>
             <div id="user-choices" class="user-choices"></div>
-            <p id="display-message"></p>
+            <span id="display-message"></span>
 
         </div>
          
         <!-- Section to display final score and prompt for initials to populate scriptDb.js file -->
         <div id="end-game-screen" class="hidden">
             <h2>Game results:</h2>
-            <p>Final Score <span id="final-score"></span></p> <!--may not need final-score variable-->
+            <p>Final Score <span id="final-score"></span></p> 
             <p>Enter Initials: <input type="text" id="initials" max=3/></p>
+            <button id="submit-button">Submit</button>
         </div>
 
     </main>
