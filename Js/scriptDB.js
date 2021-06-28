@@ -1,4 +1,4 @@
-var questions = [{
+let questions = [{
     title: "Inside which HTML do we put JavaScript?",
     choice:["<js>", "<javascript>", "<script>", "<scripting>"],
     answer: "<script>",
@@ -21,4 +21,4 @@ var questions = [{
     answer: "<script src='yyy.js'></script>",
 },
     
-]
+];

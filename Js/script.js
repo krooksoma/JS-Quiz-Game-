@@ -1,76 +1,92 @@
-let startButton = document.querySelector("#start-button");
-let gameTime = document.querySelector("#countdown");
-let gameScore = document.querySelector("#final-score");
-let question = document.querySelector("#question");
-let userChoices = document.querySelector("#user-choices")
-let endGame = document.querySelector("#end-game-score");
-let questionTitle = document.querySelector("#question-title");
+let startButton = document.querySelector('#start-button');
+let gameTime = document.querySelector('#countdown');
+let questionEl = document.querySelector('#question');
+let choicesEl = document.querySelector('#user-choices');
+let questionTitle = document.querySelector('#question-title');
+let answerBtn = document.querySelector('.choice');
+let displayMessage = document.querySelector('#display-message');
+
+
 
 // addEventListener detects click on Start Button and calls the function startGame
-startButton.addEventListener("click", startGame);
+startButton.addEventListener('click', startGame);
 
-// calculates amount of time for the game based on number of questionsl 15 seconds per question
-let time = 90;
-let currentQuestionIndex = 0;
-let correctAnswer = currentQuestionIndex.answer;
+let questionIndexEl = 0;
+let time = 60;
 
 
-function startGame(){
+// execution
+
+function startGame() {
     //set a time for the game duration
     gameTimer();
-    question.removeAttribute("class");
+    questionEl.removeAttribute('class');
+    // pull a question from the question DB
     pullQuestion();
     startButton.disabled = true; //start button is disabled until the game is finished
-    
+
 }
 
 // function to perform the countdown
-function gameTimer(){
+function gameTimer() {
     // start timer
 
-    let timerCountdown = setInterval( ()=>{
+    let timerCountdown = setInterval(() => {
         time--;
         gameTime.textContent = time;
 
-        if(time === 0){
+        if (time === 0) {
             clearInterval(timerCountdown)
             // output message of time out
-            alert("Time is out");
+            alert('Time is out');
         }
+        
+
         // console.log(time);
-    },1000);
+    }, 1000);
 }
 
-// check if a wrong question is chosen, then reduce time by 10 sec.
-
-// function to pull question from the scriptDB
-function pullQuestion(){
-    // change question-slot div from hidden to display
-    let currentQuestions = questions[currentQuestionIndex];
-    questionTitle.textContent = currentQuestions.title;
-    userChoices.textContent = "";
+function pullQuestion() {
+    let currentQuestion = questions[questionIndexEl];
+    questionTitle.textContent = currentQuestion.title;
+    choicesEl.textContent = '';
 
 
-    //pull question from db
+    // create question choice for user to choose from
+    for (let i = 0; i < currentQuestion.choice.length; i++) {
+        let createBtn = document.createElement('button');
+        createBtn.setAttribute('class', 'choice');
+        createBtn.setAttribute('value', currentQuestion.choice[i]);
+        createBtn.textContent = (i + 1) + '. ' + currentQuestion.choice[i];
+        // appends current answer Option to the list
+        choicesEl.appendChild(createBtn);
 
-    for(let i = 0; i<currentQuestions.choice.length;i++){
-        let choices = document.createElement("button");
-
-        choices.setAttribute("class", "choice");
-        choices.setAttribute("value", currentQuestions.choice[i]);
-
-        choices.textContent= i + 1 + ". " + currentQuestions.choice[i];
-        userChoices.appendChild(choices); 
-        currentQuestionIndex[i];
-        
-        
     }
-
-        
+ 
+    
 }
 
-// if(corrrectAnswer.matches("button")) ??
-console.log(currentQuestionIndex);
-// function checkAnswer(){
-//     if
-// }
+
+// check if the btn input is correct
+function checkAnswer(event) {
+    if(event.target && event.target.classList.contains('choice')){
+    let selectedAnswerValue = event.target.value;
+    let correctAnswer = questions[questionIndexEl].answer;
+    let displayMessage = document.createElement('h3');
+
+    if (selectedAnswerValue === correctAnswer) {
+        displayMessage.innerHTML = "Correct";
+        console.log(displayMessage);
+        questionIndexEl++;
+        pullQuestion();
+    } else {
+        displayMessage.textContent = "Wrong!";
+        questionIndexEl++;
+        time -= 10;
+        pullQuestion();
+    }
+    }
+}
+
+
+document.addEventListener('click', checkAnswer);
