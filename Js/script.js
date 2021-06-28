@@ -12,6 +12,8 @@ startButton.addEventListener("click", startGame);
 // calculates amount of time for the game based on number of questionsl 15 seconds per question
 let time = 90;
 let currentQuestionIndex = 0;
+let correctAnswer = currentQuestionIndex.answer;
+
 
 function startGame(){
     //set a time for the game duration
@@ -22,7 +24,7 @@ function startGame(){
     
 }
 
-// function to perform the count down
+// function to perform the countdown
 function gameTimer(){
     // start timer
 
@@ -30,7 +32,7 @@ function gameTimer(){
         time--;
         gameTime.textContent = time;
 
-        if(time ===0){
+        if(time === 0){
             clearInterval(timerCountdown)
             // output message of time out
             alert("Time is out");
@@ -45,37 +47,30 @@ function gameTimer(){
 function pullQuestion(){
     // change question-slot div from hidden to display
     let currentQuestions = questions[currentQuestionIndex];
-
     questionTitle.textContent = currentQuestions.title;
     userChoices.textContent = "";
 
 
-    //pull question
+    //pull question from db
 
     for(let i = 0; i<currentQuestions.choice.length;i++){
-        let screenOutput = document.createElement("p");
         let choices = document.createElement("button");
 
         choices.setAttribute("class", "choice");
         choices.setAttribute("value", currentQuestions.choice[i]);
 
         choices.textContent= i + 1 + ". " + currentQuestions.choice[i];
-        userChoices.appendChild(choices);      
-            
-        if(userChoices === currentQuestions.answer){
-        screenOutput.textContent = "Correct";
-        }else{
-            screenOutput.textContent = "Wrong Answer";
-            time -= 10;
-        }
-        // submit button and also check if correct or not
+        userChoices.appendChild(choices); 
+        currentQuestionIndex[i];
         
-
+        
     }
 
-    // check if correct or not 
-
-    
+        
 }
 
-
+// if(corrrectAnswer.matches("button")) ??
+console.log(currentQuestionIndex);
+// function checkAnswer(){
+//     if
+// }
