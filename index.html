@@ -13,17 +13,19 @@
     <!-- header for scoreboard and timer display -->
     <header>
         <div class="scoreboard">
-            <a href="index2.html">
+            <button id="scoreboard-btn">
                 View Scoreboard
-            </a>
+            </button>
         </div>
-        <button id="start-button"><h3>Start</h3></button>
+        <button id="start-button">
+            <h3>Start</h3>
+        </button>
         <div class="timer-display">
             Timer-Display<h3 id="countdown"></h3>
         </div>
     </header>
-   
-    
+
+
     <main>
         <!-- Section to display the question and choices. Inittialy hidden -->
         <div id="question" class="hidden">
@@ -32,14 +34,19 @@
             <span id="display-message"></span>
 
         </div>
-         
+
         <!-- Section to display final score and prompt for initials to populate scriptDb.js file -->
         <div id="end-game-screen" class="hidden">
             <h2>Game results:</h2>
-            <p>Final Score <span id="final-score"></span></p> 
-            <p>Enter Initials: <input type="text" id="initials" max=3/></p>
+            <p>Final Score <span id="final-score"></span></p>
+            <p>Enter Initials: <input type="text" id="initials" max=3 /></p>
             <button id="submit-button">Submit</button>
         </div>
+
+        <h1 id="page2-container" class="hidden"> Scoreboard Page</h1>
+        <h2 id="initials-header">
+            <p id="this-player-score"></p>
+        </h2>
 
     </main>
     <script src="Js/script.js"></script>

@@ -8,7 +8,10 @@ let endGameScreen = document.querySelector('#end-game-screen');
 let finalScore = document.querySelector('#final-score');
 let initials = document.querySelector('#initials');
 let submitButton = document.querySelector('#submit-button');
-
+let page2container = document.querySelector('#page2-container');
+let page2content = document.querySelector('#initials-header');
+let page2score = document.querySelector('#this-player-score');
+let scoreboardBtn = document.querySelector("#scoreboard-btn");
 
 // addEventListener detects click on Start Button and calls the function startGame
 startButton.addEventListener('click', startGame);
@@ -17,15 +20,16 @@ let questionIndexEl = 0;
 let time = 60;
 let winner = false;
 // create variable to access local storage ????
-let highscore = localStorage.getItem('#final-score');
-let addedUserInitials = localStorage.getItem('#initials');
 
-// function to store scoreboard
-function highscoreStorage(event) {       
-    submitButton.addEventListener('click',highscoreStorage);
-    // event.preventDefault();
-    localStorage.setItem("initials", JSON.stringify(initials));
-    localStorage.setItem("final-score", time); 
+scoreboardBtn.addEventListener('click', renderLastRegisteredScore);
+
+function renderLastRegisteredScore(){
+    page2content.removeAttribute('class');
+    let item1 = localStorage.getItem('initials').value;
+    let item2 = localStorage.getItem('userScore').value;
+    
+    page2content.textContent = item1;
+    page2score.textContent = item2;
 }
 
 // execution
@@ -112,14 +116,25 @@ function checkAnswer(event) {
     }
 }
 
-
+//function to display final score screen
 function displayFinalScreen() {
     questionEl.setAttribute('class', 'hidden');// hides question <section>
     endGameScreen.removeAttribute('class');//remove 'hidden' attribute from endGameScreen var
-    finalScore.textContent = time; // displays final score in the screeen
+    finalScore.textContent = time; // displays final score in the screen
     highscoreStorage();//calls function to store scores history   
 }
 
+// function to store scoreboard
+function highscoreStorage(event) {       
+    let user = {
+        initials: initials.value.trim(), 
+        userScore: time.value,
+    }
+    // event.preventDefault();
+    localStorage.setItem("user", JSON.stringify(user));
 
+}
 
+submitButton.addEventListener('click',highscoreStorage);
 document.addEventListener('click', checkAnswer);
+
