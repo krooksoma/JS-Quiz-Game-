@@ -6,7 +6,7 @@ let questions = [{
 { 
     title: "What is the correct JS syntax to change the content of the HTML element? <p id='demo'> This </p>", 
     choice:["document.getElementByName('p').innerHTML = 'Hello'", "document.getElement('p').innerHTML = 'Hello'", "#demo.innerHTML = 'Hello'", 
-    "document.getElementById('demo').innerHTML ='Hello'"],
+    "document.getElementById('#demo').innerHTML ='Hello'"],
     answer: "document.getElementById('demo').innerHTML = 'Hello'",
 },
 {
