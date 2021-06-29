@@ -23,21 +23,31 @@ let winner = false;
 
 scoreboardBtn.addEventListener('click', renderLastRegisteredScore);
 
-function renderLastRegisteredScore(){
+function renderLastRegisteredScore() {
+
+    // remember to parse item before bringing it into display
     page2content.removeAttribute('class');
-    let item1 = localStorage.getItem('initials').value;
-    let item2 = localStorage.getItem('userScore').value;
+    var lastPlayedScore = JSON.parse(localStorage.getItem('scoresArray'));
+    console.log(lastPlayedScore.initials);
+    console.log(lastPlayedScore.userScore);
     
-    page2content.textContent = item1;
-    page2score.textContent = item2;
+
+    if(lastPlayedScore !== null){
+        document.querySelector('#this-player-score').textContent = lastPlayedScore.initials + lastPlayedScore.userScore;
+    }
+   
 }
 
-// execution
 
-function startGame() {
+function startGame(event) {
+    time = 60;
+    questionIndexEl = 0;
+    winner= false;
+    endGameScreen.setAttribute('class', 'hidden');
+    questionEl.removeAttribute('class');
+    page2content.setAttribute('class', 'hidden');
     //set a time for the game duration
     gameTimer();
-    questionEl.removeAttribute('class');
     // pull a question from the question DB
     pullQuestion();
     startButton.disabled = true; //start button is disabled until the game is finished
@@ -59,10 +69,11 @@ function gameTimer() {
         }
 
         if (time >= 0) {
-            if (winner && time > 0) {
+            console.log(winner);
+            if (winner) {
                 clearInterval(timerCountdown);
                 displayFinalScreen();// create final screen
-
+                startButton.disabled = false;
             }
         }
 
@@ -73,6 +84,7 @@ function gameTimer() {
 
 function pullQuestion() {
     let currentQuestion = questions[questionIndexEl];
+    console.log(questionIndexEl);
     if (questionIndexEl === questions.length) {
         winner = true;
     } else {
@@ -98,6 +110,7 @@ function pullQuestion() {
 function checkAnswer(event) {
     if (event.target && event.target.classList.contains('choice')) {
         let selectedAnswerValue = event.target.value;
+        console.log(questionIndexEl);
         let correctAnswer = questions[questionIndexEl].answer;
         let displayMessage = document.createElement('h3');
 
@@ -121,20 +134,34 @@ function displayFinalScreen() {
     questionEl.setAttribute('class', 'hidden');// hides question <section>
     endGameScreen.removeAttribute('class');//remove 'hidden' attribute from endGameScreen var
     finalScore.textContent = time; // displays final score in the screen
-    highscoreStorage();//calls function to store scores history   
-}
+    }    
 
 // function to store scoreboard
-function highscoreStorage(event) {       
-    let user = {
-        initials: initials.value.trim(), 
-        userScore: time.value,
+// function highscoreStorage(event) {
+//     let user = {
+//         initials: initials.value.trim(),
+//         userScore: time.value,
+//     }
+
+//     localStorage.setItem("user", JSON.stringify(user));
+
+// }
+
+submitButton.addEventListener('click', (event) =>{
+    endGameScreen.setAttribute('class', 'hidden');
+    event.preventDefault();
+    
+    
+    let scoresArray = JSON.parse(localStorage.getItem('scoresArray')) || [];
+
+    let newScore = {
+        initials: initials.value.trim(),
+        userScore: time,
     }
-    // event.preventDefault();
-    localStorage.setItem("user", JSON.stringify(user));
+    scoresArray.push(newScore);
+    localStorage.setItem("scoresArray", JSON.stringify(scoresArray))
+    
+});
 
-}
-
-submitButton.addEventListener('click',highscoreStorage);
 document.addEventListener('click', checkAnswer);
 
