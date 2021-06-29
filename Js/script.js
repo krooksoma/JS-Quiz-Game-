@@ -26,16 +26,17 @@ scoreboardBtn.addEventListener('click', renderLastRegisteredScore);
 function renderLastRegisteredScore() {
 
     // remember to parse item before bringing it into display
-    page2content.removeAttribute('class');
-    var lastPlayedScore = JSON.parse(localStorage.getItem('scoresArray'));
-    console.log(lastPlayedScore.initials);
-    console.log(lastPlayedScore.userScore);
+    let printscores2 = JSON.stringify(scoresArray);
+    console.log(printscores2);
+    console.log(typeof printscores2);
     
 
-    if(lastPlayedScore !== null){
-        document.querySelector('#this-player-score').textContent = lastPlayedScore.initials + lastPlayedScore.userScore;
-    }
-   
+    document.getElementById("player-initials").textContent = printscores2;
+    // if(scoresArray !== null){
+    //     for(let i = 0; i < scoresArray.length;i++){
+    //         document.getElementById("player-initials").textContent = printscores2[i];
+    //     }
+    // }else{return;}
 }
 
 
@@ -146,13 +147,14 @@ function displayFinalScreen() {
 //     localStorage.setItem("user", JSON.stringify(user));
 
 // }
+let scoresArray = JSON.parse(localStorage.getItem('scoresArray')) || [];
 
 submitButton.addEventListener('click', (event) =>{
     endGameScreen.setAttribute('class', 'hidden');
     event.preventDefault();
     
     
-    let scoresArray = JSON.parse(localStorage.getItem('scoresArray')) || [];
+    
 
     let newScore = {
         initials: initials.value.trim(),
@@ -164,4 +166,3 @@ submitButton.addEventListener('click', (event) =>{
 });
 
 document.addEventListener('click', checkAnswer);
-
