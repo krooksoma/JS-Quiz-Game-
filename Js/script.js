@@ -31,7 +31,7 @@ function renderLastRegisteredScore() {
     console.log(typeof printscores2);
     
 
-    document.getElementById("player-initials").textContent = printscores2;
+    page2content.textContent = printscores2;
     // if(scoresArray !== null){
     //     for(let i = 0; i < scoresArray.length;i++){
     //         document.getElementById("player-initials").textContent = printscores2[i];
@@ -137,29 +137,18 @@ function displayFinalScreen() {
     finalScore.textContent = time; // displays final score in the screen
     }    
 
-// function to store scoreboard
-// function highscoreStorage(event) {
-//     let user = {
-//         initials: initials.value.trim(),
-//         userScore: time.value,
-//     }
-
-//     localStorage.setItem("user", JSON.stringify(user));
-
-// }
+// array created to store user scores
 let scoresArray = JSON.parse(localStorage.getItem('scoresArray')) || [];
 
 submitButton.addEventListener('click', (event) =>{
     endGameScreen.setAttribute('class', 'hidden');
     event.preventDefault();
-    
-    
-    
-
+    // creating scores object 
     let newScore = {
         initials: initials.value.trim(),
         userScore: time,
     }
+    // pushing items into the newly created object
     scoresArray.push(newScore);
     localStorage.setItem("scoresArray", JSON.stringify(scoresArray))
     
